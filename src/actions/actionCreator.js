@@ -1,6 +1,17 @@
 const axios = require('axios');
 
 // ----------------thunk--------------------//
+export const getAllUnits = () => {
+    return(dispatch => {
+        axios.get("http://localhost:9000/units/")
+            .then(res => {
+                let units = res.data;
+                dispatch(updateUnit(units));
+            })
+            .catch(err => console.log(err));
+    })
+}
+
 export const getAllPilots = () => {
     return(dispatch => {
         axios.get("http://localhost:9000/pilots/")
@@ -46,17 +57,34 @@ export const deletePilot = (id) => {
     })
 }
 
+export const saveUnit = (unit) => {
+    return(dispatch => {
+        axios.post("http://localhost:9000/units", unit)
+            .then(res => {
+                
+            })
+            .catch(err => console.log(err));
+    })
+}
+
 //----------------------------------------//
 export const updatePilot = (data) => {
     return {
-        type: "GET",
+        type: "GETPILOT",
         data : data
+    }
+}
+
+export const updateUnit = (data) => {
+    return {
+        type: "GETUNIT",
+        data: data,
     }
 }
 
 export const selectRow = (id) => {
     return {
-        type: "SELECT",
+        type: "SELECTPILOT",
         id : id
     }
 }

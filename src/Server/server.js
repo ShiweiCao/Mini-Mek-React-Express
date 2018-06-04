@@ -12,6 +12,7 @@ app.use(bodyParser.json());
 
 const Pilot = require('./Model/pilot.js')
 const Mech = require('./Model/mech.js')
+const Unit = require('./Model/unit.js')
 
 app.use((req, res, next) => {
     console.log("A " + req.method + " request received at " + new Date());
@@ -176,4 +177,29 @@ app.delete('/meches/:mech_id', (req,res) => {
         }
         res.status(500).json({'Mech deleted!': req.params.mech_id});
     })
+})
+
+//-----------------------Unit---------------------
+app.post('/units', (req, res) => {
+    var unit = new Unit();
+    unit.name = req.body.name;
+    unit.affiliation = req.body.affiliation;
+    unit.color = req.body.color;
+
+    unit.save( err => {
+        if(err) {
+            res.status(500).send(err);
+        } 
+        res.status(201).json({"Unit created" : unit});
+    });
+});
+
+app.get('/units', (req, res) => {
+    Unit.find((err, data) => {
+        if(err) {
+            res.status(500).send(err);
+        } else {
+            res.status(200).json(data);
+        }
+    }) 
 })

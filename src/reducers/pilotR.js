@@ -1,13 +1,15 @@
 let initialState = {
     pilots : [],
     temp : {},
+    units: [],
+    Meches: [],
 }
 
 const pilotR = (state = initialState, action) => {
     switch (action.type) {
-        case "GET":
+        case "GETPILOT":
             return {...state, pilots: [...action.data], temp: action.data[0]};
-        case "SELECT": 
+        case "SELECTPILOT": 
             return {...state, temp: state.pilots[action.id]}
         case "CHANGE":
             let obj = {...state.temp};
