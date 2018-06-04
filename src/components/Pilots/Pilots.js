@@ -6,14 +6,13 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
-import Dialog from '@material-ui/core/Dialog';
 
 import { connect } from "react-redux";
 
 import Tablerow from './Tablerow'
+import Navigation from '../Navigation'
 import * as actions from '../../actions/actionCreator.js'
 
-const axios = require('axios');
 
 class Pilots extends Component {
     constructor(props) {
@@ -70,6 +69,7 @@ class Pilots extends Component {
     render() {
         return (
             <div className="pilotsContainer" style={{width: "1350px", margin: "auto"}}>
+                <Navigation/>
                 <div className="pilotTable" style={{width: "800px", float: "left"}}>
                     <h1> Pilots List</h1>
                     <Table>

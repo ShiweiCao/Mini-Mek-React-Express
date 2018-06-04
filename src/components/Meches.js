@@ -7,6 +7,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
+import Navigation from './Navigation'
+
 class Meches extends Component {
     constructor(props) {
         super(props);
@@ -71,6 +73,7 @@ class Meches extends Component {
     render() {
         return (
             <div className="mechsContainer" style={{width: "1350px", margin: "auto"}}>
+                <Navigation/>
                 <div className="mechsTable" style={{width: "800px", float: "left"}}>
                     <h1> Mechs List</h1>
                     <Table>

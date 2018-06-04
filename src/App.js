@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import { BrowserRouter, Route, Link} from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 
 import UnitInfo from './components/UnitInfo'
 import Pilots from './components/Pilots/Pilots'
@@ -35,17 +32,7 @@ class App extends Component {
                         <Route path="/Meches" component={Meches} />
                         <Route path='/organization' component={Unit}/>
                     </div>
-                </BrowserRouter>
-                
-
-                {/* <AppBar position="static" color="primary">
-                    <Tabs onChange={this.handleChange} centered>
-                        <Link to='/UnitInfo'><Tab label="Unit Info" /></Link>
-                        <Tab label="Pilots" />
-                        <Tab label="Mechs" />
-                        <Tab label="Unit Organization" />
-                    </Tabs>
-                </AppBar> */}
+                </BrowserRouter>                
                 
                 {/* {this.state.tab === 0 && <UnitInfo />}
                 {this.state.tab === 1 && <Pilots />}
