@@ -11,13 +11,13 @@ export default class Tablerow extends Component {
     render() {
         return(
             <TableRow onClick={ () => this.props.select(this.props.index) }>
-                <TableCell> {this.props.element.Name} </TableCell>
-                <TableCell> {this.props.element.Rank} </TableCell>
-                <TableCell> {this.props.element.Age} </TableCell>
-                <TableCell> {this.props.element.Gunnery} </TableCell>
-                <TableCell> {this.props.element.Mech} </TableCell>
+                <TableCell> {this.props.element.name} </TableCell>
+                <TableCell> {this.props.element.rank} </TableCell>
+                <TableCell> {this.props.element.age} </TableCell>
+                <TableCell> {this.props.element.piloting}/{this.props.element.gunnery} </TableCell>
+                <TableCell> {this.props.element.MechType} </TableCell>
                 <TableCell> 
-                    <Button variant="raised" color="secondary">
+                    <Button variant="raised" color="secondary" onClick={ () => this.props.delete(this.props.element._id)}>
                         Delete
                     </Button>
                 </TableCell>

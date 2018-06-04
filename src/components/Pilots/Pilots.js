@@ -5,30 +5,31 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import Input from '@material-ui/core/Input';
+import Dialog from '@material-ui/core/Dialog';
+
+import { connect } from "react-redux";
 
 import Tablerow from './Tablerow'
+import * as actions from '../../actions/actionCreator.js'
 
+const axios = require('axios');
 
 class Pilots extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            pilots : [
-                { Name : "Natasha", Rank : "Commander", Age : 34, Gunnery: "2", Piloting: "3", Mech : "WHM-6R" },
-                { Name : "Jaime", Rank : "Colonel", Age : 42, Gunnery: "2", Piloting: "2", Mech : "ARC-2R" },
-            ],
             selected : 0,
             edit : true,
-            temp: {Name : "Natasha", Rank : "Commander", Age : 34, Gunnery: "2", Piloting: "3", Mech : "WHM-6R"},
         }
     }
 
+    componentDidMount() {
+        this.props.dispatch(actions.getAllPilots())
+    }
+
     selcetRow = (id) => {
-        this.setState({
-            selected : id, 
-            temp : this.state.pilots[id]
-        })
+        this.props.dispatch(actions.selectRow(id))
     }
 
     startEdit = () => {
@@ -40,22 +41,30 @@ class Pilots extends Component {
     endEdit = () => {
         this.setState({
             edit : true,
-            temp : this.state.pilots[this.state.selected]
         })
+        this.props.dispatch(actions.selectRow(this.state.selected))
     }
 
     handleChange = (e, tar) => {
-        let obj = {...this.state.temp};
-        obj[tar] = e.target.value;
-        this.setState({
-            temp : obj,
-        })
+        this.props.dispatch(actions.change(e.target.value, tar))
     }
 
     reset = () => {
-        this.setState({
-            temp : this.state.pilots[this.state.selected]
-        })
+        this.props.dispatch(actions.selectRow(this.state.selected))
+    }
+
+    save = () => {
+        this.props.dispatch(actions.saveChange(this.props.temp));
+    }
+
+    addNew = () => {
+        this.setState({edit: false});
+        this.props.dispatch(actions.clearTemp());
+    }
+
+    delete = (id) => {
+        this.props.dispatch(actions.deletePilot(id));
+
     }
 
     render() {
@@ -76,50 +85,54 @@ class Pilots extends Component {
                         </TableHead>
                         <TableBody>
                             {
-                                this.state.pilots.map ((element, index) => (
+                                this.props.pilots.map ((element, index) => (
                                     <Tablerow element={element} 
                                     index={index} 
                                     select={this.selcetRow}
+                                    delete={this.delete}
                                     />
                                 ))
                             }
                         </TableBody>
                     </Table>
-                    <Button variant="raised" fullWidth> Add New </Button>
+                    <Button variant="raised" fullWidth onClick={this.addNew}> Add New </Button>
                 </div>
 
                 <div className="pilotDetail" style={{width: "500px", float:"right"}}>
                     <h1> Pilot Details </h1>
                     <div>
                         <div style={{width: "400px", margin: "auto 0"}}>
-                            <TextField id="Name" label="Name" 
-                            onChange={(e) => this.handleChange(e,"Name")} 
-                            value={this.state.temp.Name} 
-                            fullWidth disabled={this.state.edit}/> <br/><br/>
+                            Name<Input id="name" label="Name" 
+                            onChange={(e) => this.handleChange(e,"name")} 
+                            value={this.props.temp.name} 
+                            disabled={this.state.edit} fullWidth/> <br/><br/>
 
-                            <TextField id="Rank" label="Rank" 
-                            onChange={(e) => this.handleChange(e,"Rank")} 
-                            value={this.state.temp.Rank} 
-                            fullWidth disabled={this.state.edit}/> <br/><br/>
+                            Rank <Input id="Rank" label="Rank" 
+                            onChange={(e) => this.handleChange(e,"rank")} 
+                            value={this.props.temp.rank} 
+                            disabled={this.state.edit} fullWidth/> <br/><br/>
 
-                            <TextField id="Age" label="Age" 
-                            onChange={(e) => this.handleChange(e,"Age")} 
-                            value={this.state.temp.Age} 
-                            disabled={this.state.edit}/> <br/><br/>
+                            Age<br/> <Input id="age" label="Age" 
+                            onChange={(e) => this.handleChange(e,"age")} 
+                            value={this.props.temp.age} 
+                            disabled={this.state.edit}
+                            type="number"/> <br/><br/>
 
-                            <TextField id="Gunnery" label="Gunnery" 
-                            onChange={(e) => this.handleChange(e,"Gunnery")}                            
-                            value={this.state.temp.Gunnery} 
-                            disabled={this.state.edit}/> <br/><br/>
+                            Gunnery<br/> <Input id="gunnery" label="Gunnery" 
+                            onChange={(e) => this.handleChange(e,"gunnery")}                            
+                            value={this.props.temp.gunnery} 
+                            disabled={this.state.edit}
+                            type="number"/> <br/><br/>
 
-                            <TextField id="Piloting" label="Piloting" 
-                            onChange={(e) => this.handleChange(e,"Piloting")}                             
-                            value={this.state.temp.Piloting} 
-                            disabled={this.state.edit}/> <br/><br/>
+                            Piloting<br/> <Input id="piloting" label="Piloting" 
+                            onChange={(e) => this.handleChange(e,"piloting")}                             
+                            value={this.props.temp.piloting} 
+                            disabled={this.state.edit}
+                            type="number"/> <br/><br/>
                         </div>
                     </div>
                     <Button variant="raised" color="primary" onClick={this.startEdit} disabled={!this.state.edit}> Start Edit </Button>
-                    <Button variant="raised" color="inherit" disabled={this.state.edit} style={{margin: "10px"}}> Save Edit </Button><br/><br/>
+                    <Button variant="raised" color="inherit" onClick={this.save} disabled={this.state.edit} style={{margin: "10px"}}> Save Edit </Button><br/><br/>
                     <Button variant="raised" color="default" onClick={this.reset} disabled={this.state.edit}> Reset Value </Button>
                     <Button variant="raised" color="secondary" onClick={this.endEdit} disabled={this.state.edit} style={{margin: "10px"}}> Cancel Edit </Button>
                 </div>
@@ -129,4 +142,11 @@ class Pilots extends Component {
     }
 }
 
-export default Pilots;
+const mapStateToProps = (state) => {
+    return {
+        pilots : state.pilotR.pilots,
+        temp : state.pilotR.temp,
+    }
+}
+
+export default connect(mapStateToProps)(Pilots);

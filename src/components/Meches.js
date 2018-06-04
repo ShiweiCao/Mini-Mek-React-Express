@@ -7,7 +7,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
-class Mech extends Component {
+class Meches extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -138,4 +138,4 @@ class Mech extends Component {
     }
 }
 
-export default Mech;
+export default Meches;

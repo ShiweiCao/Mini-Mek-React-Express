@@ -46,7 +46,7 @@ app.get('/pilots', (req, res) => {
 })
 
 // get by id
-app.get('/pilot/:pilot_id', (req, res) =>{
+app.get('/pilots/:pilot_id', (req, res) =>{
     Pilot.findById(req.params.pilot_id, (err, data) => {
         if(err) {
             res.status(500).send(err);
@@ -74,7 +74,7 @@ app.post('/pilots', (req, res) => {
 });
 
 // modify pilot
-app.put('/pilot/:pilot_id', (req,res) => {
+app.put('/pilots/:pilot_id', (req,res) => {
     Pilot.findById(req.params.pilot_id, (err, pilot) => {
         
         if(err) {
@@ -98,7 +98,7 @@ app.put('/pilot/:pilot_id', (req,res) => {
 })
 
 // Delete pilot
-app.delete('/pilot/:pilot_id', (req,res) => {
+app.delete('/pilots/:pilot_id', (req,res) => {
     Pilot.remove({
         _id : req.params.pilot_id
     }, (err, pilot) => {
@@ -121,7 +121,7 @@ app.get('/meches', (req, res) => {
 })
 
 
-app.get('/mech/:mech_id', (req, res) =>{
+app.get('/meches/:mech_id', (req, res) =>{
     Mech.findById(req.params.mech_id, (err, data) => {
         if(err) {
             res.status(500).send(err);
@@ -146,7 +146,7 @@ app.post('/meches', (req, res) => {
     });
 });
 
-app.put('/mech/:mech_id', (req,res) => {
+app.put('/meches/:mech_id', (req,res) => {
     Mech.findById(req.params.mech_id, (err, mech) => {
         
         if(err) {
@@ -167,7 +167,7 @@ app.put('/mech/:mech_id', (req,res) => {
     })
 })
 
-app.delete('/mech/:mech_id', (req,res) => {
+app.delete('/meches/:mech_id', (req,res) => {
     Mech.remove({
         _id : req.params.mech_id
     }, (err, mech) => {
