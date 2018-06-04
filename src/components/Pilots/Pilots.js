@@ -85,6 +85,7 @@ class Pilots extends Component {
                             }
                         </TableBody>
                     </Table>
+                    <Button variant="raised" fullWidth> Add New </Button>
                 </div>
 
                 <div className="pilotDetail" style={{width: "500px", float:"right"}}>
