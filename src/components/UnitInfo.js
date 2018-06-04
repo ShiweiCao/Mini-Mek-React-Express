@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
+
 class UnitInfo extends Component {
     constructor(props) {
         super(props);
@@ -24,6 +25,19 @@ class UnitInfo extends Component {
         })
     }
 
+    changeHandler = (colors) => {
+        // this.setState({
+        //     color: colors
+        // })
+        console.log(colors);
+    }
+
+
+
+
+
+    
+
     render() {
         return (
             <div style={{width: "300px", margin: "auto"}}>
@@ -32,7 +46,9 @@ class UnitInfo extends Component {
                     <option key="0" value="Wolf's Dragoons">Wolf's Dragoons</option>
                     <option key="1" value="MK2">MK2</option>
                 </TextField> <br/>
-                <Button variant="raised" >Save</Button>
+
+                <Button variant="raised" color="primary" style={{margin: "10px"}}>Save</Button>
+                <Button variant="raised" color="secondary"> Reset </Button>               
             </div>
         )
     }

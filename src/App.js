@@ -26,7 +26,7 @@ class App extends Component {
     render() {
         return (
             <div>
-                <AppBar position="static" color="seconary">
+                <AppBar position="static" color="primary">
                     <Tabs onChange={this.handleChange} centered>
                         <Tab label="Unit Info" />
                         <Tab label="Pilots" />
