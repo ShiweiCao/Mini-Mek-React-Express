@@ -7,6 +7,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
+import Tablerow from './Tablerow'
 
 
 class Pilots extends Component {
@@ -76,18 +77,10 @@ class Pilots extends Component {
                         <TableBody>
                             {
                                 this.state.pilots.map ((element, index) => (
-                                    <TableRow onClick={ () =>this.selcetRow(index)}>
-                                        <TableCell> {element.Name} </TableCell>
-                                        <TableCell> {element.Rank} </TableCell>
-                                        <TableCell> {element.Age} </TableCell>
-                                        <TableCell> {element.Gunnery + '/' + element.Piloting} </TableCell>
-                                        <TableCell> {element.Mech} </TableCell>
-                                        <TableCell> 
-                                            <Button variant="raised" color="secondary">
-                                                Delete
-                                            </Button> 
-                                        </TableCell>
-                                    </TableRow>
+                                    <Tablerow element={element} 
+                                    index={index} 
+                                    select={this.selcetRow}
+                                    />
                                 ))
                             }
                         </TableBody>

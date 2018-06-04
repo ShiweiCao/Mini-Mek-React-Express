@@ -4,7 +4,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
 import UnitInfo from './components/UnitInfo'
-import Pilots from './components/Pilots'
+import Pilots from './components/Pilots/Pilots'
 import Mechs from './components/Mechs'
 import Unit from './components/UnitOrganization'
 
