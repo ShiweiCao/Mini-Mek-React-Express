@@ -24,7 +24,19 @@ export const getAllPilots = () => {
     )
 }
 
-export const saveChange = (pilot) => {
+export const getAllMeches = () => {
+    return(dispatch => {
+        axios.get("http://localhost:9000/meches/")
+            .then(res => {
+                let pilots = res.data;
+                dispatch(updateMech(pilots));
+            })
+            .catch(err => console.log(err));
+        }
+    )
+}
+
+export const savePilot = (pilot) => {
     if (pilot._id !== undefined){
         return(dispatch => {
             axios.put("http://localhost:9000/pilots/" + pilot._id, pilot)
@@ -46,11 +58,46 @@ export const saveChange = (pilot) => {
     }   
 }
 
+export const saveMech = (mech) => {
+    if (mech._id !== undefined){
+        return(dispatch => {
+            axios.put("http://localhost:9000/meches/" + mech._id, mech)
+                .then(res => {
+                    dispatch(getAllMeches());
+                })
+                .catch(err => console.log(err));
+        })
+    } 
+    
+    else {
+        return(dispatch => {
+            axios.post("http://localhost:9000/meches/", mech)
+                .then(res => {
+                    dispatch(getAllMeches());
+                })
+                .catch(err => console.log(err));
+        })
+    }   
+}
+
+
+
 export const deletePilot = (id) => {
     return(dispatch => {
         axios.delete("http://localhost:9000/pilots/" + id)
             .then(res => {
                 dispatch(getAllPilots());
+
+            })
+            .catch(err => console.log(err));
+    })
+}
+
+export const deleteMech = (id) => {
+    return(dispatch => {
+        axios.delete("http://localhost:9000/meches/" + id)
+            .then(res => {
+                dispatch(getAllMeches());
 
             })
             .catch(err => console.log(err));
@@ -82,9 +129,23 @@ export const updateUnit = (data) => {
     }
 }
 
-export const selectRow = (id) => {
+export const updateMech = (data) => {
+    return {
+        type: "GETMECH",
+        data: data
+    }
+}
+
+export const selectPilotRow = (id) => {
     return {
         type: "SELECTPILOT",
+        id : id
+    }
+}
+
+export const selectMechRow = (id) => {
+    return {
+        type: "SELECTMECH",
         id : id
     }
 }
@@ -102,3 +163,4 @@ export const clearTemp = () => {
         type: "CLEARTEMP",
     }
 }
+

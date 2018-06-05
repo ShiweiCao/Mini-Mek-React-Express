@@ -61,6 +61,7 @@ class UnitInfo extends Component {
             <div>
                 <Navigation/>
                 <div style={{width: "300px", margin: "10px auto"}}>
+                    <h1> Unit Info </h1>
                     <TextField id="Unit Name" label="Unit Name" value={this.state.unitName} onChange={this.onChange}/> <br/>
                     <TextField select label="Affiliation" style={{width: '200px', margin: '30px auto'}} onChange={this.select} value={this.state.Affiliation}>
                         {

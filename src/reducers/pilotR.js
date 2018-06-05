@@ -2,7 +2,7 @@ let initialState = {
     pilots : [],
     temp : {},
     units: [],
-    Meches: [],
+    meches: [],
 }
 
 const pilotR = (state = initialState, action) => {

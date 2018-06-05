@@ -14,7 +14,7 @@ import Navigation from '../Navigation'
 import * as actions from '../../actions/actionCreator.js'
 
 
-class Pilots extends Component {
+class Meches extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -24,11 +24,11 @@ class Pilots extends Component {
     }
 
     componentDidMount() {
-        this.props.dispatch(actions.getAllPilots())
+        this.props.dispatch(actions.getAllMeches())
     }
 
     selcetRow = (id) => {
-        this.props.dispatch(actions.selectPilotRow(id))
+        this.props.dispatch(actions.selectMechRow(id))
     }
 
     startEdit = () => {
@@ -41,7 +41,7 @@ class Pilots extends Component {
         this.setState({
             edit : true,
         })
-        this.props.dispatch(actions.selectPilotRow(this.state.selected))
+        this.props.dispatch(actions.selectMechRow(this.state.selected))
     }
 
     handleChange = (e, tar) => {
@@ -49,11 +49,11 @@ class Pilots extends Component {
     }
 
     reset = () => {
-        this.props.dispatch(actions.selectPilotRow(this.state.selected))
+        this.props.dispatch(actions.selectMechRow(this.state.selected))
     }
 
     save = () => {
-        this.props.dispatch(actions.savePilot(this.props.temp));
+        this.props.dispatch(actions.saveMech(this.props.temp));
     }
 
     addNew = () => {
@@ -62,7 +62,7 @@ class Pilots extends Component {
     }
 
     delete = (id) => {
-        this.props.dispatch(actions.deletePilot(id));
+        this.props.dispatch(actions.deleteMech(id));
 
     }
 
@@ -76,16 +76,15 @@ class Pilots extends Component {
                         <TableHead>
                             <TableRow>
                                 <TableCell> Name </TableCell>
-                                <TableCell> Rank </TableCell>
-                                <TableCell> Age </TableCell>
-                                <TableCell> Skills </TableCell>
-                                <TableCell> Mech </TableCell>
+                                <TableCell> Model </TableCell>
+                                <TableCell> Weight </TableCell>
+                                <TableCell> Class </TableCell>
                                 <TableCell> Delete </TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {
-                                this.props.pilots.map ((element, index) => (
+                                this.props.meches.map ((element, index) => (
                                     <Tablerow element={element} 
                                     index={index} 
                                     select={this.selcetRow}
@@ -98,37 +97,31 @@ class Pilots extends Component {
                     <Button variant="raised" fullWidth onClick={this.addNew}> Add New </Button>
                 </div>
 
-                <div className="pilotDetail" style={{width: "500px", float:"right"}}>
+                <div className="mechDetail" style={{width: "500px", float:"right"}}>
                     <h1> Pilot Details </h1>
                     <div>
                         <div style={{width: "400px", margin: "auto 0"}}>
-                            Name<Input id="name" label="Name" 
+                            Name<Input id="name"  
                             onChange={(e) => this.handleChange(e,"name")} 
                             value={this.props.temp.name} 
                             disabled={this.state.edit} fullWidth/> <br/><br/>
 
-                            Rank <Input id="Rank" label="Rank" 
-                            onChange={(e) => this.handleChange(e,"rank")} 
-                            value={this.props.temp.rank} 
+                            Model <Input id="model"  
+                            onChange={(e) => this.handleChange(e,"model")} 
+                            value={this.props.temp.model} 
                             disabled={this.state.edit} fullWidth/> <br/><br/>
 
-                            Age<br/> <Input id="age" label="Age" 
-                            onChange={(e) => this.handleChange(e,"age")} 
-                            value={this.props.temp.age} 
+                            Weight<br/> <Input id="weight"  
+                            onChange={(e) => this.handleChange(e,"weight")} 
+                            value={this.props.temp.weight} 
                             disabled={this.state.edit}
                             type="number"/> <br/><br/>
 
-                            Gunnery<br/> <Input id="gunnery" label="Gunnery" 
-                            onChange={(e) => this.handleChange(e,"gunnery")}                            
-                            value={this.props.temp.gunnery} 
-                            disabled={this.state.edit}
-                            type="number"/> <br/><br/>
+                            Class<br/> <Input id="class"  
+                            onChange={(e) => this.handleChange(e,"class")}                            
+                            value={this.props.temp.class} 
+                            disabled={this.state.edit}/> <br/><br/>
 
-                            Piloting<br/> <Input id="piloting" label="Piloting" 
-                            onChange={(e) => this.handleChange(e,"piloting")}                             
-                            value={this.props.temp.piloting} 
-                            disabled={this.state.edit}
-                            type="number"/> <br/><br/>
                         </div>
                     </div>
                     <Button variant="raised" color="primary" onClick={this.startEdit} disabled={!this.state.edit}> Start Edit </Button>
@@ -137,16 +130,15 @@ class Pilots extends Component {
                     <Button variant="raised" color="secondary" onClick={this.endEdit} disabled={this.state.edit} style={{margin: "10px"}}> Cancel Edit </Button>
                 </div>
             </div>
-           
         )
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        pilots : state.pilotR.pilots,
-        temp : state.pilotR.temp,
+        meches : state.mechR.meches,
+        temp : state.mechR.temp,
     }
 }
 
-export default connect(mapStateToProps)(Pilots);
+export default connect(mapStateToProps)(Meches);
