@@ -54,6 +54,7 @@ class Pilots extends Component {
 
     save = () => {
         this.props.dispatch(actions.savePilot(this.props.temp));
+        this.setState({edit:true});
     }
 
     addNew = () => {

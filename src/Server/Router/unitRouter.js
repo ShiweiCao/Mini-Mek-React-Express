@@ -3,7 +3,7 @@ const unitRouter = express.Router();
 
 const Unit = require('../Model/unit.js');
 
-unitRouter.post('/units', (req, res) => {
+unitRouter.post('/', (req, res) => {
     var unit = new Unit();
     unit.name = req.body.name;
     unit.affiliation = req.body.affiliation;
@@ -17,7 +17,7 @@ unitRouter.post('/units', (req, res) => {
     });
 });
 
-unitRouter.get('/units', (req, res) => {
+unitRouter.get('/', (req, res) => {
     Unit.find((err, data) => {
         if(err) {
             res.status(500).send(err);

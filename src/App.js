@@ -27,6 +27,7 @@ class App extends Component {
             <div>
                 <BrowserRouter>
                     <div className="container">
+                        <Route path="/" exact={true} component={UnitInfo} />
                         <Route path="/UnitInfo" exact={true} component={UnitInfo} />
                         <Route path="/Pilots" component={Pilots} />
                         <Route path="/Meches" component={Meches} />

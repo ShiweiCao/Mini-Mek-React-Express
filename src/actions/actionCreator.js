@@ -87,7 +87,7 @@ export const deletePilot = (id) => {
         axios.delete("http://localhost:9000/pilots/" + id)
             .then(res => {
                 dispatch(getAllPilots());
-
+                
             })
             .catch(err => console.log(err));
     })
