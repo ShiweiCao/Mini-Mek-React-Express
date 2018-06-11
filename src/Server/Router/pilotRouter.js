@@ -72,9 +72,9 @@ pilotRouter.delete('/:pilot_id', (req,res) => {
         _id : req.params.pilot_id
     }, (err, pilot) => {
         if(err) {
-            res.status(200).send(err);
+            res.status(500).send(err);
         }
-        res.status(500).send('Pilot deleted!');
+        res.status(200).send('Pilot deleted!');
     })
 })
 

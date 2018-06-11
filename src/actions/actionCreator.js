@@ -17,6 +17,7 @@ export const getAllPilots = () => {
         axios.get("http://localhost:9000/pilots/")
             .then(res => {
                 let pilots = res.data;
+                console.log(pilots);
                 dispatch(updatePilot(pilots));
             })
             .catch(err => console.log(err));
@@ -80,12 +81,11 @@ export const saveMech = (mech) => {
     }   
 }
 
-
-
 export const deletePilot = (id) => {
     return(dispatch => {
         axios.delete("http://localhost:9000/pilots/" + id)
             .then(res => {
+                // console.log("test");
                 dispatch(getAllPilots());
                 
             })

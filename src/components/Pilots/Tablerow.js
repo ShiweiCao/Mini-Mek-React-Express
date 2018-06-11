@@ -10,7 +10,7 @@ export default class Tablerow extends Component {
 
     render() {
         return(
-            <TableRow>
+            <TableRow selected={this.props.isSelected}>
                 <TableCell onClick={ () => this.props.select(this.props.index) }> {this.props.element.name} </TableCell>
                 <TableCell onClick={ () => this.props.select(this.props.index) }> {this.props.element.rank} </TableCell>
                 <TableCell onClick={ () => this.props.select(this.props.index) }> {this.props.element.age} </TableCell>

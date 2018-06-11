@@ -16,7 +16,7 @@ const pilotR = (state = initialState, action) => {
             obj[action.target] = action.value;
             return {...state, temp: obj}
         case "CLEARTEMP":
-            return {...state, temp: {}}
+            return {...state, temp: {name:"", rank:"", age:0, gunnery:0, piloting:0}}
         default:
             return state;       
     }

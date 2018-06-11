@@ -28,6 +28,9 @@ class Pilots extends Component {
     }
 
     selcetRow = (id) => {
+        this.setState({
+            selected: id,
+        })
         this.props.dispatch(actions.selectPilotRow(id))
     }
 
@@ -91,6 +94,7 @@ class Pilots extends Component {
                                     index={index} 
                                     select={this.selcetRow}
                                     delete={this.delete}
+                                    isSelected={index == this.state.selected?true:false}
                                     />
                                 ))
                             }
